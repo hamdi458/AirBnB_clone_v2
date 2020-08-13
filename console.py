@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
             if not ds:
                 raise SyntaxError()
             args = ds.split(" ")
-            d = dict()
+            kwargs = dict()
             for item in args[1:]:
                 key = item.split("=")[0]
                 value = item.split("=")[1]
@@ -134,15 +134,20 @@ class HBNBCommand(cmd.Cmd):
                         value = eval(value)
                     except (SyntaxError, NameError):
                         continue
-                d[key] = value
-            obj = eval("{}()".format(args[0]))
-            obj.__dict__.update(d)
+                kwargs[key] = value
+            if kwargs == {}:
+                obj = eval(args[0])()
+            else:
+                obj = eval(args[0])(**kwargs)
+                storage.new(obj)
+            print(obj.id)
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
+    
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
