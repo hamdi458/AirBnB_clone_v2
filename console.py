@@ -128,26 +128,18 @@ class HBNBCommand(cmd.Cmd):
                 key = item.split("=")[0]
                 value = item.split("=")[1]
                 if value[0] == '"':
-                    value = value.strip('"').replace("_", " ")
+                    value = value.strip('"').replace("_", " ")                   
                 else:
-                    try:
-                        value = eval(value)
-                    except (SyntaxError, NameError):
-                        continue
+                    value = eval(value)
                 kwargs[key] = value
-            if kwargs == {}:
-                obj = eval(args[0])()
-            else:
-                obj = eval(args[0])(**kwargs)
-                storage.new(obj)
-            print(obj.id)
+            obj = eval("{}()".format(args[0]))
+            obj.__dict__.update(kwargs)
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
-    
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
