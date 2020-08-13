@@ -13,7 +13,7 @@ class FileStorage:
         if cls:
             dd = {}
             for key, val in self.__objects.items():
-                if type(val) == cls:
+                if cls == val.__class__ or cls == val.__class__.__name__:
                     dd[key] = val
             return dd
         return self.__objects
