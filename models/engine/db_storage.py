@@ -17,7 +17,7 @@ class DBStorage:
     """DBStorage class"""
     __engine = None
     __session = None
- 
+
     def __init__(self):
         """Init"""
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
@@ -28,7 +28,7 @@ class DBStorage:
                                       pool_pre_ping=True)
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         """all"""
         my_dict = {}
@@ -47,12 +47,15 @@ class DBStorage:
             key = "{}.{}".format(val.__class__.__name__, val.id)
             my_dict[key] = val
         return my_dict
+
     def new(self, obj):
         """new"""
         self.__session.add(obj)
+
     def save(self):
         """save"""
         self.__session.commit()
+
     def delete(self, obj=None):
         """Delete obj from the current database session."""
         if obj is not None:
