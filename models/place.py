@@ -26,7 +26,7 @@ class Place(BaseModel, Base):
     def reviews(self):
         """getter"""
         list_my = []
-        for x in list(models.storage.all(City).values()):
+        for x in models.storage.all(Review).values():
             if reviews.place_id == self.id:
                 list_my.append(x)
         return list_my
