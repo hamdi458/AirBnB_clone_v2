@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
+from models.review import Review
 from sqlalchemy import Column, String, Integer, Float
 from sqlalchemy import ForeignKey, Table
 from sqlalchemy.orm import relationship
@@ -26,7 +27,7 @@ class Place(BaseModel, Base):
     def reviews(self):
         """getter"""
         list_my = []
-        for x in models.storage.all(Review).values():
-            if reviews.place_id == self.id:
-                list_my.append(x)
+        for k, v in models.storage.all(Review).items():
+            if Review.place_id == self.id:
+                list_my.append(v)
         return list_my
