@@ -5,10 +5,11 @@ import models
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column
-from sqlalchemy import Integer 
-from sqlalchemy import  String
-from sqlalchemy import  DateTime
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import DateTime
 Base = declarative_base()
+
 
 class BaseModel:
     """A base class for all hbnb models"""
@@ -24,7 +25,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            
+
         else:
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                      '%Y-%m-%dT%H:%M:%S.%f')
