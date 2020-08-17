@@ -7,7 +7,6 @@ mkdir -p /data/web_static/
 mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
-touch /data/web_static/releases/test/index.html
 echo "<html>
   <head>
   </head>
@@ -20,12 +19,14 @@ chown -R ubuntu: /data/
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
-    root   /usr/share/nginx/html;
-    index  index.html index.htm;
-    
+    root   /var/www//html;
+    index index.nginx-debian.html index.nginx-debian.html;
+    location /redirect_me {
+        return 301 http://youtube.com/;
     }
-    location /hbnb_static{
+    location /hbnb_static {
     alias /data/web_static/current/;
+    
     }
 }" > /etc/nginx/sites-available/default
 sudo service nginx start
