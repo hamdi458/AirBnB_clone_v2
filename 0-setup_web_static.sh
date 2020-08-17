@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 # Bash script that sets up your web servers for the deployment of web_static
-sudo apt-get update
-sudo apt-get install nginx
-mkdir -p /data/
-mkdir -p /data/web_static/ 
+sudo apt-get -y update
+sudo apt-get -y install nginx
 mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/shared/
-mkdir -p /data/web_static/releases/test/
 echo "<html>
   <head>
   </head>
@@ -15,7 +12,7 @@ echo "<html>
   </body>
 </html>" > /data/web_static/releases/test/index.html
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-chown -R ubuntu: /data/
+sudo chown -R ubuntu: /data/
 printf %s "server {
     listen 80;
     listen [::]:80 default_server;
@@ -29,4 +26,4 @@ printf %s "server {
     
     }
 }" > /etc/nginx/sites-available/default
-sudo service nginx start
+sudo service nginx restart
