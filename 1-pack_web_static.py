@@ -7,9 +7,12 @@ import time
 
 
 def do_pack():
-    tiime = datetime.now().strftime("%Y%m%d%H%M%S")
-    archive_path = "versions/web_static_{}.tgz".format(tiime)
-    if local('mkdir -p versions').failed is True or local(
-            "tar -cvzf {} web_static".format(archive_path)).failed is True:
+    """do_pack"""
+    try:
+        tiime = datetime.now().strftime("%Y%m%d%H%M%S")
+        archive_path = "versions/web_static_{}.tgz".format(tiime)
+        local('mkdir -p versions')
+        local("tar -cvzf {} web_static".format(archive_path))
+        return archive_path
+    except BaseException:
         return None
-    return archive_path
