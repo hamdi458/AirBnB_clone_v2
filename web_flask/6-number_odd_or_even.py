@@ -44,8 +44,8 @@ def num_temp(n):
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
-def numbersandevenness(n):
-    """display a HTML page only if n is an integer"""
+def paire_impaire(n):
+    """paire ou impaire"""
     if n % 2 == 0:
         paire_im = 'even'
     else:
