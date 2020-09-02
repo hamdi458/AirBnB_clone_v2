@@ -22,5 +22,4 @@ if __name__ == "__main__":
         """txt"""
         txt = txt.replace("_", " ")
         return "C {}".format(txt)
-
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5000)
